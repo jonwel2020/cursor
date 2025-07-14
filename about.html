@@ -1,0 +1,62 @@
+<?php
+include('common/header.html');
+?>
+<style>
+    .m-face{
+        min-height: 20rem;
+        position: relative;
+    }
+    .m-logo{
+        position: absolute;
+        bottom: -4rem;
+        display: block;
+        width: 8rem;
+        border-radius: 4rem;
+        overflow: hidden;
+        background: #fff;
+        margin: auto;
+        left: 0;
+        right: 0;
+        border-bottom: 1px solid #000;
+    }
+    .m-content{
+        min-height: 20rem;
+        padding: 5rem 1rem;
+        background: #fff;
+    }
+    .m-foot{
+
+    }
+</style>
+<div class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">关于</h1>
+</div>
+<div class="mui-content user-collect">
+    <div class="m_document">
+        <div class="m-face">
+<img src="<?=MODULE_URL.'app/images/m-face.jpg'?>" width="100%"/>
+            <span class="m-logo"><img src="<?=$w['attachurl'].$sys['syslogo']?>" width="100%"></span>
+        </div>
+        <div class="m-content">
+            <?=mysys('about')?>
+        </div>
+        <div class="m-foot">
+            <div class="contact" style="text-align: center;padding: 3rem;">
+                <p class="f_t_txt">如有疑问，欢迎联系我们</p>
+                <?php if(@$sys['phone']):?>
+                <p><a href="tel:<?=$sys['phone']?>" class="mui-btn mui-icon mui-icon-phone-filled cr_btn" style="width:80%">&nbsp;&nbsp;<?=$sys['phone']?></a></p>
+                <?php endif; ?>
+                <?php if(@$sys['qq']):?>
+                <p><a href="http://wpa.qq.com/msgrd?v=3&uin=<?=$sys['qq']?>" class="mui-btn mui-icon mui-icon-qq cr_btn" style="width:80%">&nbsp;&nbsp;<?=$sys['qq']?></a></p>
+                <?php endif; ?>
+                <!--<p class="f_t_txt">&copy;<?=@$sys['sysname']?$sys['sysname']:'一点众筹'?>版权所有</p>-->
+                 <p class="f_t_txt">江苏微网公司提供技术支持</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php
+include('common/footer.html');
+?>
