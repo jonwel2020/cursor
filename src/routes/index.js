@@ -27,6 +27,16 @@ router.get('/', (req, res) => {
   });
 });
 
+// 健康检查接口
+router.get('/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    version: process.env.npm_package_version || '1.0.0',
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
 // 注册子路由
 router.use('/api/v1', apiV1Routes);
 router.use('/api/admin', adminRoutes);

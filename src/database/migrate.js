@@ -1,6 +1,9 @@
 require('dotenv').config();
 const { sequelize } = require('./connection');
 
+// 导入所有模型
+const User = require('../models/User');
+
 /**
  * 数据库迁移脚本
  * 这个脚本会同步所有数据库模型到数据库

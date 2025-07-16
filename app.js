@@ -11,13 +11,13 @@ const databaseConfig = require('./config/database');
 
 // 导入中间件
 const logger = require('./src/middleware/logger');
-const errorHandler = require('./src/middleware/error');
+const { errorHandler } = require('./src/middleware/error');
 
 // 导入路由
 const routes = require('./src/routes');
 
 // 导入数据库连接
-const db = require('./src/database/connection');
+const { sequelize } = require('./src/database/connection');
 
 const app = express();
 
@@ -58,16 +58,6 @@ app.use(logger.requestLogger);
 // API路由
 app.use('/', routes);
 
-// 健康检查接口
-app.get('/health', (req, res) => {
-  res.json({
-    status: 'ok',
-    timestamp: new Date().toISOString(),
-    version: process.env.npm_package_version || '1.0.0',
-    environment: process.env.NODE_ENV || 'development'
-  });
-});
-
 // 404处理
 app.use('*', (req, res) => {
   res.status(404).json({
@@ -85,12 +75,12 @@ app.use(errorHandler);
 async function startServer() {
   try {
     // 测试数据库连接
-    await db.authenticate();
+    await sequelize.authenticate();
     console.log('✅ 数据库连接成功');
 
     // 同步数据库模型（开发环境）
     if (process.env.NODE_ENV === 'development') {
-      await db.sync({ alter: true });
+      await sequelize.sync({ alter: true });
       console.log('📊 数据库模型同步完成');
     }
 
@@ -112,13 +102,13 @@ async function startServer() {
 // 优雅关闭
 process.on('SIGTERM', async () => {
   console.log('📱 接收到 SIGTERM 信号，正在关闭服务器...');
-  await db.close();
+  await sequelize.close();
   process.exit(0);
 });
 
 process.on('SIGINT', async () => {
   console.log('📱 接收到 SIGINT 信号，正在关闭服务器...');
-  await db.close();
+  await sequelize.close();
   process.exit(0);
 });
 

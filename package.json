@@ -8,7 +8,14 @@
     "dev": "nodemon app.js",
     "migrate": "node src/database/migrate.js",
     "seed": "node src/database/seed.js",
-    "test": "jest",
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch",
+    "test:coverage": "NODE_ENV=test jest --coverage",
+    "test:unit": "NODE_ENV=test jest tests/unit",
+    "test:integration": "NODE_ENV=test jest tests/integration",
+    "test:verbose": "NODE_ENV=test jest --verbose",
+    "test:silent": "NODE_ENV=test jest --silent",
+    "test:setup": "NODE_ENV=test npm run migrate && npm run seed",
     "docs": "apidoc -i src/routes/ -o docs/api/"
   },
   "keywords": [
@@ -23,28 +30,29 @@
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.18.2",
-    "mysql2": "^3.6.5",
-    "sequelize": "^6.35.2",
+    "axios": "^1.10.0",
     "bcryptjs": "^2.4.3",
-    "jsonwebtoken": "^9.0.2",
     "cors": "^2.8.5",
-    "helmet": "^7.1.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
     "express-rate-limit": "^7.1.5",
     "express-validator": "^7.0.1",
-    "dotenv": "^16.3.1",
-    "winston": "^3.11.0",
-    "winston-daily-rotate-file": "^4.7.1",
-    "multer": "^1.4.5-lts.1",
-    "moment": "^2.29.4",
+    "helmet": "^7.1.0",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
-    "uuid": "^9.0.1"
+    "moment": "^2.29.4",
+    "multer": "^1.4.5-lts.1",
+    "mysql2": "^3.6.5",
+    "sequelize": "^6.35.2",
+    "uuid": "^9.0.1",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1"
   },
   "devDependencies": {
-    "nodemon": "^3.0.2",
+    "apidoc": "^0.54.0",
     "jest": "^29.7.0",
-    "supertest": "^6.3.3",
-    "apidoc": "^0.54.0"
+    "nodemon": "^3.0.2",
+    "supertest": "^6.3.3"
   },
   "engines": {
     "node": ">=16.0.0"
